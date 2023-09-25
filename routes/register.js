@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const dotenv = require('dotenv')
+dotenv.config({ path: ('./.env.local') })
+const JWT_KEY = process.env.JWT_SECRET;
 const { body, validationResult } = require('express-validator');
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken')
 
-const JWT_KEY = "@$#^^*~"
 //Create a user using POST : /api/auth ("Doesnt Require Auth")
 router.post('/',[
     body('name','Enter a Valid Name!').isLength({min : 3}),
